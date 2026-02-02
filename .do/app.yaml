@@ -6,7 +6,7 @@ services:
       repo: blainerothrock/c-pointers-pres
       branch: main
       deploy_on_push: true
-    run_command: pnpm slidev --remote --port 8080
+    dockerfile_path: Dockerfile
     http_port: 8080
     instance_size_slug: basic-xs
     instance_count: 1
