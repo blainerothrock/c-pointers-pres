@@ -1,0 +1,11 @@
+name: c-pointers-pres
+services:
+  - name: c-pointers-lecture
+    github:
+      repo: blainerothrock/c-pointers-pres
+      branch: main
+      deploy_on_push: true
+    run_command: npx slidev --remote --port 8080 --bind 0.0.0.0
+    http_port: 8080
+    instance_size_slug: basic-xxs
+    instance_count: 1
