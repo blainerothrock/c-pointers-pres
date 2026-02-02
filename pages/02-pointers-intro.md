@@ -304,21 +304,21 @@ transition: fade
 
 ::left::
 
-<v-click>
-    <div class="flex justify-end">
-        <MemoryTable 
-            title="stack frame B" 
-            :baseAddress="0x000a"
-            :variables="[
-                { type: 'gap', value: 4 },
-                { type: 'char*', name: 'pa', value: 0x00001009 },
-                { type: 'gap', value: 2 },
-            ]"
-            highlight="pa"
-            showValues
-        />
-    </div>
-</v-click>
+
+<div class="flex justify-end">
+    <MemoryTable 
+        title="stack frame B" 
+        :baseAddress="0x000a"
+        :variables="[
+            { type: 'gap', value: 0 },
+            { type: 'int*', name: 'pb', value: 0x00001009 },
+            { type: 'char*', name: 'pa', value: 0x00001005 },
+            { type: 'gap', value: 2 },
+        ]"
+        highlight="pb"
+        showValues
+    />
+</div>
 
 ::right::
 
@@ -331,14 +331,14 @@ transition: fade
             { type: 'int', name: 'b', value: 25234 },
             { type: 'char', name: 'a', value: 97 }
         ]"
-        highlight="a"
+        highlight="b"
         showValues
     />
 </div>
 
 
 <v-click>
-    <Arrow x1="500" y1="350" x2="620" y2="210" color="#ff5555" width="2" />
+    <Arrow x1="500" y1="465" x2="620" y2="240" color="#ff5555" width="2" />
 </v-click>
 
 ---
