@@ -1,0 +1,20 @@
+{
+  "name": "c-pointers",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "build": "slidev build",
+    "dev": "slidev --open",
+    "export": "slidev export"
+  },
+  "dependencies": {
+    "@iconify-json/uil": "^1.2.3",
+    "@slidev/cli": "^52.11.3",
+    "@slidev/theme-default": "latest",
+    "@slidev/theme-seriph": "latest",
+    "vue": "^3.5.26"
+  },
+  "devDependencies": {
+    "@iconify-json/vscode-icons": "^1.2.40"
+  }
+}

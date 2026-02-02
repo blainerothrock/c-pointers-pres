@@ -1,0 +1,17 @@
+/* Make the Slidev run button more visible */
+.slidev-monaco-container .slidev-icon-btn {
+  opacity: 1 !important;
+  background: #67c52a;
+  color: #1e1e1e;
+  border-radius: 4px;
+  z-index: 10;
+}
+.slidev-monaco-container .slidev-icon-btn:hover {
+  background: #7ddf42;
+}
+
+/* Layout helpers */
+.two-cols-header.col-wide-left {
+  grid-template-columns: 3fr 2fr !important;
+  gap: 0 1.5rem !important;
+}
