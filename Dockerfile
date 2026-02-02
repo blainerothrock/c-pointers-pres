@@ -8,9 +8,6 @@ RUN pnpm install
 
 COPY . .
 
-# Pre-warm Vite's dependency optimization cache
-RUN pnpm slidev build || true
-
 EXPOSE 8080
 
-CMD ["pnpm", "slidev", "--remote", "--port", "8080"]
+CMD ["sh", "-c", "sleep infinity | pnpm slidev --remote --port 8080"]
