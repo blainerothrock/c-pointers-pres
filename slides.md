@@ -10,6 +10,10 @@ mdc: true
 # The C Programming Language
 ### Pointers
 
+<br />
+
+[c-pointers.exe.xyz](https://c-pointer.exe.xyz)
+
 ---
 layout: default
 ---
