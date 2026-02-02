@@ -1,11 +1,20 @@
 name: c-pointers-pres
-static_sites:
+region: nyc
+services:
   - name: c-pointers-lecture
     github:
       repo: blainerothrock/c-pointers-pres
       branch: main
       deploy_on_push: true
-    build_command: pnpm build
-    output_dir: dist
+    run_command: pnpm slidev --remote --port 8080
+    http_port: 8080
+    instance_size_slug: basic-xs
+    instance_count: 1
     routes:
       - path: /
+    health_check:
+      http_path: /
+      initial_delay_seconds: 60
+      period_seconds: 15
+      timeout_seconds: 10
+      failure_threshold: 10
