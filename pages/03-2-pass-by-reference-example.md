@@ -189,3 +189,7 @@ int main() {
     printf("a = %d   (after fn square)\n", a);
 }
 ```
+
+<!--
+    Now let's look at couple more syntax examples
+-->

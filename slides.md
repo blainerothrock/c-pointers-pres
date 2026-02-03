@@ -98,3 +98,11 @@ int main() {
 1. Where is the `5 * sizeof(int)` object stored?
 2. Where is `int* arr` variable stored?
 3. Why might you implement this pattern? 
+
+
+---
+background: https://cover.sli.dev
+class: text-center
+---
+
+# End.

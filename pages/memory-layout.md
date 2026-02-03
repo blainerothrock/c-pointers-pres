@@ -397,9 +397,4 @@ For the rest of this lecture we are going to talk about pointers, I key tool for
 
 
 * syntax is what makes pointers confusing, the concept is quite simple.
-
-## Draw on screen
-[BEFORE START: which block does local variables live in?]
-
-Pointers in the Stack which map to large data stored the Heap, BSS, or DATA blocks.
 -->

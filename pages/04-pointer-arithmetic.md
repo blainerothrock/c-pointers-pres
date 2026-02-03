@@ -76,6 +76,15 @@ int main() {
 Pointer arithmetic is at the core of the array implementation
 * An array variable is basically a pointer
 
+<!--
+arrays are bascially pointers (but not exactly)
+
+a pointer to array can be used the same as an array itself.
+
+ARRAYS cannot be passed.
+
+-->
+
 ---
 layout: two-cols-header
 layoutClass: col-wide-left 
@@ -107,7 +116,7 @@ int main() {
 ```
 
 ::right::
-Arrays are *always* passed as pointers, usually with the size.
+Arrays are *always* passed as pointers, usually with the array size.
 * There is no protection for accessing off the end or before the beginning of an array.
 * An **Address Sanitizer** can help with this at compile time
 

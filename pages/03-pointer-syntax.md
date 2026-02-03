@@ -321,6 +321,12 @@ Address `0x0` does not exist in memory
 * The `NULL` reference, a pointer to nothing
 * The compiler provides no protection to writing to non-existing memory (**memory safety**)
 
+<!-- 
+    we talked earlier about the NULL pointer
+    it's represented by 0, which is not a memory address
+    this is DANGEROUS.
+-->
+
 ---
 layout: two-cols-header
 layoutClass: col-wide-left 
@@ -349,6 +355,11 @@ Pointers can point to pointers
     * ...
 
 Used in functions that alter pointers or complex data types
+
+<!--
+Pointers are not limited to just one point, they can point to a bunch.
+in fact, at least 12 must be supported, but far more in modern compilers.
+-->
 
 ---
 layout: two-cols-header
@@ -381,3 +392,11 @@ int main() {
 
 Generic pointers (`void*`) are an address where the value is undefined. 
 * Cannot be dereferenced without casting
+
+<!--
+I said that pointers have types ... well not all of them.
+
+Generic pointers are pointer wihtout a type and a simple a pointer to a single memory address.
+
+you CANNOT dereference theses with out a cast, but are useful when allocating memory blocks
+-->

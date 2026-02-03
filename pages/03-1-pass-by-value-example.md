@@ -27,6 +27,14 @@ int main() {
 C **is strictly** pass by value
 * when a variable is *passed* from a caller, it is **always** copied.
 
+<!--
+
+[Question] what is the output here?
+ -- what is A before and after calling SQUARE()?
+
+ it doesn't change. hm .... let's explore
+-->
+
 ---
 layout: two-cols-header
 transition: fade
@@ -65,6 +73,7 @@ int main() {        // program entry point
         :showTopEllipsis="false"
     />
 </div>
+
 
 ---
 layout: two-cols-header
