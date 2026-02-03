@@ -10,9 +10,24 @@ mdc: true
 # The C Programming Language
 ### Pointers
 
-<br />
+<div class="flex justify-around mt-8">
+<div class="text-center">
+<img src="/images/slide-app-qr.png" alt="Slides QR" class="mx-auto w-36" />
+<p class="text-sm mt-2">Slides</p>
+<a href="https://c-pointers-pres-caeed.ondigitalocean.app/" class="text-xs">c-pointers-pres-caeed.ondigitalocean.app</a>
+</div>
+<div class="text-center">
+<img src="/images/source-code-qr.png" alt="GitHub QR" class="mx-auto w-36" />
+<p class="text-sm mt-2">Source Code</p>
+<a href="https://github.com/blainerothrock/c-pointers-pres" class="text-xs">github.com/blainerothrock/c-pointers-pres</a>
+</div>
+</div>
 
-[c-pointers.exe.xyz](https://c-pointer.exe.xyz)
+<!-- 
+Welcome!
+
+The slides and presentation source code can be found with these two links
+-->
 
 ---
 layout: default
@@ -28,7 +43,7 @@ layout: default
 
 <br />
 
-### Lecture Goals (What you should take away)
+### Lecture Goals
 * A grasp of what pointers are and why we need them
 * An introduction and reference to pointer syntax
   * The ability to use pointers effectively will take practice

@@ -7,6 +7,7 @@ layout: section
 
 ---
 layout: two-cols-header
+transition: fade
 ---
 
 # Program Memory
@@ -19,13 +20,20 @@ layout: two-cols-header
 * code and static variables are loaded (static memory)
 * space is allocated for runtime (dynamic memory)
 
-<!-- When we say *memory* we are referring to random access memory (RAM)
-
-* Programs also have access to registers (fast) and disk (slow) -->
+<br />
 
 **Memory is organized as a contiguous array of addresses**
 
 * Each address represents 1-byte (8-bits) of space
+* Byte order within objects is determined by the system's *Endianness*
+
+<!--
+When we refer to memory, we mean RAM.
+
+Programs have access to other types of data stores, including
+* registers (fast, managed by compilier)
+* Disk (slow, managed by the OS)
+-->
 
 ::right::
 <div class="flex justify-end">
@@ -343,8 +351,6 @@ transition: fade
 
 **Pointers are a notorious concept in C**
 
-<br />
-
 To tackle them we will:
 1. Build a mental model
 2. Introduce the Syntax
@@ -355,3 +361,13 @@ To tackle them we will:
 <div class="flex justify-end">
     <MemoryLayout />
 </div>
+
+<!-- 
+
+* syntax is what makes pointers confusing, the concept is quite simple.
+
+## Draw on screen
+[BEFORE START: which block does local variables live in?]
+
+Pointers in the Stack which map to large data stored the Heap, BSS, or DATA blocks.
+-->

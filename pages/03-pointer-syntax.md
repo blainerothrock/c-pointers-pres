@@ -223,6 +223,10 @@ int main() {
 
 `->` is *syntactic sugar* for the member access operator (`.`)
 
+<!--
+    When a struct is passed, the arrow operator is required.
+-->
+
 
 ---
 src: "03-1-pass-by-value-example.md"

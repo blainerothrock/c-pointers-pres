@@ -11,6 +11,7 @@ transition: fade
 ---
 
 # Values, Variables, and Data Types
+review
 
 ::left::
 
@@ -139,7 +140,8 @@ int main() {
 }
 ```
 
-* The value is "pushed" to the lowest location in the stack
+<br />
+The value is "pushed" to the lowest location in the stack
 
 * `a`'s location in memory is represented by an **address**
 * an address is a 64 or 32-bit integer (system dependent)
@@ -174,21 +176,22 @@ Assign a variable
 ```c [main.c]
 int main() {
     char a = 97; // 'a' character is ASCII
-    int b = 25234
+    int b = 25234;
     
     return 0;
 }
 ```
-
+<div v-click>
 * The value is "pushed" to the lowest location on the stack
 
 * `b`'s location in memory spans 4 addresses (4 bytes)
     * this contiguous span is called an **object**
     * the first address is always the lowest address
+</div>
 
 ::right::
 
-<div class="flex justify-end">
+<div v-after class="flex justify-end">
     <MemoryTable 
     title="stack"
         :baseAddress="0x1000"
@@ -202,6 +205,11 @@ int main() {
         showValues
     />
 </div>
+
+<!--
+## question before click
+How many bytes does a integer take?
+-->
 
 ---
 layout: two-cols-header
@@ -223,10 +231,14 @@ layoutClass: col-wide-left
 
 <br />
  
-**Pointers can have a type**
+**Pointers have a type**
 * Every data type can have a pointer
 * The type determines the size of the data pointed to and how to read it
-* Pointers always store the lowest address to the object it points to
+* Pointers are always the first address (lowest) of an object (regardless of endianness)
+
+<!--
+draw on screen: point to address, explain first address
+-->
 
 ::right::
 
@@ -293,6 +305,10 @@ transition: fade
 <v-click>
     <Arrow x1="500" y1="350" x2="620" y2="210" color="#ff5555" width="2" />
 </v-click>
+
+<!--
+question: what size is a pointer to a char? 
+-->
 
 ---
 layout: two-cols-header
