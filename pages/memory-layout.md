@@ -28,6 +28,15 @@ transition: fade
 * Byte order within objects is determined by the system's *Endianness*
 
 <!--
+This is standard program memory diagram, with common components
+- It starts at low-address (bottom) and extends to a high address (top)
+
+-
+there are two sections
+* static memory
+* dynamic memory
+
+-
 When we refer to memory, we mean RAM.
 
 Programs have access to other types of data stores, including
@@ -63,6 +72,16 @@ All programs operate with this layout, but C gives you direct access.
     <MemoryLayout />
 </div>
 
+<!-- 
+This is somewhat simplified, but for the most part is universal.
+In many programming languages you don't need to know this, but in C you have direct access to the programs memory.
+-
+
+on modern operating systems: programs are given a virtual memory block which mimics a complete system (e.g., you cannot alter memory of a different process)
+
+on microcontrollers, you are working with real memory layout.
+-->
+
 ---
 layout: two-cols-header
 transition: fade
@@ -83,6 +102,15 @@ When executed, Static Memory is populated before any instructions run
 <div class="flex justify-end">
     <MemoryLayout highlight="static" />
 </div>
+
+<!--
+(quick)
+When a program is started, the static memory is populated
+
+
+-
+BSS - block starting symbol
+-->
 
 ---
 layout: two-cols-header
@@ -204,7 +232,6 @@ transition: fade
 ::left::
 
 During runtime, the program manages dynamic memory space. 
-* C gives the programmer complete control (to utilize and mess up)
 
 **The Heap** is manually managed to store data.
 * Grows upwards from a minimum address
@@ -222,6 +249,9 @@ During runtime, the program manages dynamic memory space.
     <MemoryLayout highlight="dynamic" />
 </div>
 
+<!--
+In C Programming, dyanmic memory is your to utilize and to mess up!
+-->
 
 ---
 layout: two-cols-header
@@ -363,6 +393,8 @@ To tackle them we will:
 </div>
 
 <!-- 
+For the rest of this lecture we are going to talk about pointers, I key tool for memory management
+
 
 * syntax is what makes pointers confusing, the concept is quite simple.
 

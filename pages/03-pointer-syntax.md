@@ -5,6 +5,14 @@ layout: section
 # Pointer Syntax
 ## (let's finally code)
 
+<!--
+You know have a understanding of what Pointer ARE, 
+but the syntax is where things can get confusing. 
+
+Here we will walk though examples of pointer syntax, but I don't expect everyhting to hit or be remembered yet. 
+Keep an open mind about what is possible, we will practice the syntax plenty
+-->
+
 ---
 layout: two-cols-header
 layoutClass: col-wide-left 
@@ -35,9 +43,17 @@ int main() {
 
 ::right::
 
-Suggestions (see [C style guide]()):
+Suggestions (see [C style guide](https://nu-cs211.github.io/cs211-files/cstyle.html)):
 * use declarator without a space: `int*`
 * never declare multiple variables on the same line.
+
+<!--
+Before we begin, note you can update code and run it here. You can also open in Compiler Explorer to run your code in a browser.
+
+A astrict is used to declare a pointer, this is placed before a variable type, but there are inconsistenacies in style
+
+here we define some uninitialized pointers. Without assignment, they point to the NULL address (0), more on that later
+-->
 
 
 ---
@@ -71,6 +87,18 @@ int main() {
 
 `&` returns the address of the first byte of the object storing the value
 
+<!--
+Here we demonostrate assigning a pointer.
+It's the same as other vartiables, but we need a tool to GET THE ADDRESS of a vairable
+This is the address-of operator (ampersand)
+
+
+Pointers are displayed as Hexidecimals (base-16)
+* this is a convience
+* 16 is a power of 2 and cleanly maps bytes in 4 characters (also a power of 2)
+* the `%p` string does this autimatically `%x` is also hex. 
+-->
+
 
 ---
 layout: two-cols-header
@@ -91,7 +119,7 @@ int main() {
     int* a_ptr = &a;
     int c = *a_ptr;
 
-    printf("pa = %p, a = %d\n", a_ptr, *a_ptr); 
+    printf("a_ptr = %p, a = %d\n", a_ptr, *a_ptr); 
     printf("c == a?: %s\n", c==a ? "true" : "false");
 
     c++;                // `c` is incremented, but not `a`
@@ -108,12 +136,20 @@ Returns the value at the address stored in the pointer.
 
 <br />
 
-This is where pointer types are important
-* The type allows dereferencing across multiple addresses
+The pointer type allows correct dereferencing
+
+
+<!--
+Now I said earlier that we can use a pointer to get at the value ot points to .... this is what DEREFERENCING does.
+It returns the VALUE of what is stored at the address
+
+here we have an example of assigning a pointer `a_ptr`, then creating a new variable c with the value to which a_ptr points to.
+-->
 
 ---
 layout: two-cols-header
 layoutClass: col-wide-left 
+hide: true
 ---
 
 # Dereference a Pointer
@@ -184,6 +220,14 @@ int main() {
 The dereference operator functions the same as the variable itself
 * **Note**: dereferencing is *a little* slower, requiring multiple memory lookups
 
+<!--
+Anything you can do with the variable you can now do with the pointer
+
+This is less important with small object like this, but more important when you have structure or arrays which are too big for the stack
+
+Out next example demonstrates that
+-->
+
 
 ---
 layout: two-cols-header
@@ -224,7 +268,13 @@ int main() {
 `->` is *syntactic sugar* for the member access operator (`.`)
 
 <!--
-    When a struct is passed, the arrow operator is required.
+
+For example here we see a struct for a Book.
+
+The book is populated, a pointer is set, and then we update the price using a pointer. 
+There is a shorthand to doing this with arrow operator.
+
+This all may seem redundant, but when a struct is passed to a function, the arrow operator is required.
 -->
 
 

@@ -29,8 +29,8 @@ review
 
 ### Variables have **data types**
 * Types dictate the size in memory
+* **All data stored has a concrete size**
 * Size is dependent on the system
-* **Everything stored has an explicit size**
 
 ::right::
 
@@ -53,6 +53,16 @@ int main() {
     return 0;
 }
 ```
+
+<!--
+
+Values are information or data
+Variables store values
+Variables have data types
+
+-- 
+don't worry too much about the syntax of the struct here.
+-->
 
 ---
 layout: two-cols-header
@@ -85,6 +95,10 @@ int main() {
         showValues
     />
 </div>
+
+<!--
+Here we have a empty main function, and a empty stack frame (local storage in RAM)
+-->
 
 ---
 layout: two-cols-header
@@ -119,6 +133,11 @@ int main() {
         showValues
     />
 </div>
+
+<!--
+We add a value, which serves no purpose, and store nothing in memory.
+(this is valid in some compilers, and not others, you would never do it)
+-->
 
 ---
 layout: two-cols-header
@@ -162,6 +181,14 @@ The value is "pushed" to the lowest location in the stack
     />
 </div>
 
+<!--
+Now we add a variable a, and set it to 97 (or the lowercase letter a in ASCII)
+* This value is now stored in memory, and pushed to the stack.
+* chars are a single byte, therefore only a single slot in memory is reserved
+* this slot in memory has an address, which is usually a 64-bit number (on modern systems), however we use 32-bit here to fit.
+
+-->
+
 ---
 layout: two-cols-header
 transition: fade
@@ -182,6 +209,7 @@ int main() {
 }
 ```
 <div v-click>
+
 * The value is "pushed" to the lowest location on the stack
 
 * `b`'s location in memory spans 4 addresses (4 bytes)
@@ -207,8 +235,12 @@ int main() {
 </div>
 
 <!--
+Now we add another variable, a interger
+
 ## question before click
-How many bytes does a integer take?
+* How many bytes does a integer take? (it depends is the correct answer, but 4)
+
+[draw] a circle around the lowest address.
 -->
 
 ---
@@ -276,7 +308,7 @@ transition: fade
             :baseAddress="0x000a"
             :variables="[
                 { type: 'gap', value: 4 },
-                { type: 'char*', name: 'pa', value: 0x0000100 },
+                { type: 'char*', name: 'pa', value: 0x00001009 },
                 { type: 'gap', value: 2 },
             ]"
             highlight="pa"
@@ -307,7 +339,15 @@ transition: fade
 </v-click>
 
 <!--
-question: what size is a pointer to a char? 
+Here in a arbitraty memory space (stack from a) - we have our character a. 
+
+
+* question: what size is a pointer to a char? 
+
+
+[click] somewhere else in memory, we have a pointer
+
+[click] this pointer allows us to access and manpulate a outside of it's memory context.
 -->
 
 ---
@@ -327,8 +367,8 @@ transition: fade
         :baseAddress="0x000a"
         :variables="[
             { type: 'gap', value: 0 },
-            { type: 'int*', name: 'pb', value: 0x00001009 },
-            { type: 'char*', name: 'pa', value: 0x00001005 },
+            { type: 'int*', name: 'pb', value: 0x00001005 },
+            { type: 'char*', name: 'pa', value: 0x00001009 },
             { type: 'gap', value: 2 },
         ]"
         highlight="pb"
@@ -354,8 +394,15 @@ transition: fade
 
 
 <v-click>
-    <Arrow x1="500" y1="465" x2="620" y2="240" color="#ff5555" width="2" />
+    <Arrow x1="500" y1="465" x2="620" y2="330" color="#ff5555" width="2" />
 </v-click>
+
+<!--
+
+Same thing here, we have a new pointer which points a int.
+
+[click] allowing us to access b from somewhere else. 
+-->
 
 ---
 layout: two-cols-header
@@ -372,19 +419,42 @@ layoutClass: col-wide-left
 
 <br >
 
+<div v-click>
+
 ### Reference
 * C functions *pass by value*
 * Without pointers, all data is copied
 * Reference allows modification across scope
+</div>
 
 <br >
+
+<div v-click>
 
 ### Complex Data Types
 * Arrays and Strings require pointers (more later)
 * Linked lists, trees, etc. all possible with pointers
+</div>
 
 ::right::
 
 <div class="flex justify-end">
     <MemoryLayout />
 </div>
+
+<!--
+but why do we need this, you may ask?
+
+pointers are required to do complex logic with memory, and it's required in thing like low-level system development.
+* This makes C great for those that know how to use it, but very complex for simple tasks
+
+[click] One core example is pass-by-value
+* anytime a something is passed in c (like a function) it is copied, pointers help make this manageable (we see more later)
+
+[click] Complex data type require reference and iteration
+* like arrays and string (well see later)
+* and type which reference or chain together (or self-reference), we'll see in another lecture.
+
+
+[ANY QUESTIONS?]
+-->
