@@ -244,7 +244,7 @@ The indirection operator: `*`
 
 ::left::
 
-```c {*}{lines:true} {monaco-run}
+```c{monaco-run}
 #include<stdio.h>
 
 int main() {

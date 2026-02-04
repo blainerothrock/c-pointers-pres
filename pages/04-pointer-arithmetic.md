@@ -92,7 +92,7 @@ An array is a pointer when passed to a function
 
 ::left::
 
-```c {*}{lines:true} {monaco-run}
+```c{monaco-run}
 #include<stdio.h>
 
 void square_arr(int arr[], int size) {
@@ -138,7 +138,7 @@ arrays *decay* to a pointer
 
 ::left::
 
-```c {*}{lines:true} {monaco-run}
+```c{monaco-run}
 #include<stdio.h>
 #include <stdlib.h>
 
@@ -170,7 +170,7 @@ implementing `strlen` with pointer arithmetic
 
 ::left::
 
-```c {*}{lines:true} {monaco-run}
+```c{monaco-run}
 #include<stdio.h>
 
 int my_strlen(char* s) {
