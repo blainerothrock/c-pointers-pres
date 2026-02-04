@@ -3,7 +3,7 @@ layout: section
 ---
 
 # Pointer Syntax
-## How to ... Pointer
+## How to use pointers
 
 <!--
 You know have a understanding of what Pointer ARE, 
@@ -386,7 +386,6 @@ Address `0x0` does not exist in memory
 * The `NULL` reference, a pointer to nothing
 * The compiler provides no protection to writing to non-existing memory (**memory safety**)
 
-<img src="/images/point-to-void.png" alt="void pointer meme" class="w-48 mx-auto mt-4" />
 
 <!--
 [Check] "What happens if you dereference NULL?"
@@ -463,6 +462,10 @@ int main() {
 
 Generic pointers (`void*`) are an address where the value is undefined. 
 * Cannot be dereferenced without casting
+
+<br />
+
+<img src="/images/point-to-void.png" alt="void pointer meme" class="w-48 mx-auto mt-4" />
 
 <!--
 I said that pointers have types ... well not all of them.
