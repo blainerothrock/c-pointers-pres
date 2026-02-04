@@ -326,26 +326,30 @@ layout: default
 # Quick Reference: `*` and `&`
 
 * **`&` (address-of):** given a variable, returns its memory address
-  * `int* a_ptr = &a;` — get the address of `a`
+  * `int* a_ptr = &a;` get the address of `a`
 * **`*` (dereference):** given a pointer, returns the value at that address
-  * `int val = *a_ptr;` — get the value `a_ptr` points to
+  * `int val = *a_ptr;` get the value `a_ptr` points to
 
 
 **They are inverses:**
 * `*(&a) == a` — dereference the address of `a` gives back `a`
-* `&(*a_ptr) == a_ptr` — address of the dereferenced pointer gives back the pointer
+* `&(*a_ptr) == a_ptr` address of the dereferenced pointer gives back the pointer
 
 
 **The `*` symbol is overloaded:**
-* In a **declaration**: `int* p` — declares `p` as a pointer to `int`
-* In an **expression**: `*p` — dereferences `p` to get the value
-* As an **operator**: `a * b` — multiplication
+* In a **declaration**: `int* p` declares `p` as a pointer to `int`
+* In an **expression**: `*p` dereferences `p` to get the value
+* As an **operator**: `a * b` multiplication
 
 <!--
 [Check] "What's the difference between * in a declaration vs * in an expression?"
 
 This is a reference slide students can come back to. The key insight is that & and * are inverses.
 -->
+
+---
+src: "03-1b-pass-by-value-walkthrough.md"
+---
 
 ---
 src: "03-2-pass-by-reference-example.md"
@@ -414,6 +418,7 @@ int main() {
     // reads: a pointer to a pointer of type int
     int** a_ptr_ptr = &a_ptr; 
 
+    printf("a_ptr: %p, a_ptr_ptr: %p\n", a_ptr, a_ptr_ptr);
     printf("the value of `a` is %d\n", **a_ptr_ptr);
 }
 ```

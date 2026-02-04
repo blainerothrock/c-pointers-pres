@@ -143,7 +143,8 @@ void swap(int* a, int* b) {
 }
 
 int main() {
-    int x = 3, y = 7;
+    int x = 3;
+    int y = 7;
     printf("before swap: x=%d, y=%d\n", x, y);
     swap(&x, &y);
     printf("after swap:  x=%d, y=%d\n", x, y);
@@ -183,7 +184,8 @@ void swap(int* a, int* b) {
 }
 
 int main() {
-    int x = 3, y = 7;
+    int x = 3;
+    int y = 7;
     printf("before swap: x=%d, y=%d\n", x, y);
     swap(&x, &y);
     printf("after swap:  x=%d, y=%d\n", x, y);
@@ -206,6 +208,7 @@ int main() {
 
 ---
 layout: two-cols-header
+class: gap-4
 ---
 
 # Compare
@@ -222,7 +225,8 @@ void swap(int a, int b) {
 }
 
 int main() {
-    int x = 3, y = 7;
+    int x = 3;
+    int y = 7;
     printf("before: x=%d, y=%d\n", x, y);
     swap(x, y);
     printf("after:  x=%d, y=%d\n", x, y);
@@ -240,7 +244,8 @@ void swap(int* a, int* b) {
 }
 
 int main() {
-    int x = 3, y = 7;
+    int x = 3;
+    int y = 7;
     printf("before: x=%d, y=%d\n", x, y);
     swap(&x, &y);
     printf("after:  x=%d, y=%d\n", x, y);

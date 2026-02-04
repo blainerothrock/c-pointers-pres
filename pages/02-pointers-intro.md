@@ -266,7 +266,7 @@ layoutClass: col-wide-left
 int main() {
     char a = 97; // 'a' character is ASCII
     int b = 25234;
-    int *a_ptr = &a;
+    int* a_ptr = &a;
     
     return 0;
 }
@@ -301,7 +301,7 @@ layoutClass: col-wide-left
 int main() {
     char a = 97; // 'a' character is ASCII
     int b = 25234;
-    int *a_ptr = &a;
+    int* a_ptr = &a;
     
     return 0;
 }

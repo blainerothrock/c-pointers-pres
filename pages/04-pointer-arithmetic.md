@@ -22,17 +22,8 @@ int main() {
     double* heap_ptr = malloc(sizeof(double));
     printf("heap_ptr:      %p\n", heap_ptr);
     
-    double* heap_ptr_next = heap_ptr + 1;
-    printf("heap_ptr_next: %p\n\n", heap_ptr_next);
-    
-    int ptr_diff = heap_ptr_next - heap_ptr;
-    printf("diff (elements): %d\n", ptr_diff);
-
-    int byte_diff = (char*)heap_ptr_next - (char*)heap_ptr;
-    printf("diff (bytes):    %d\n", byte_diff);
-
-    void* v_ptr = malloc(16);
-    // v_ptr++;         // compilation error (depending)
+    heap_ptr++;
+    printf("heap_ptr_next: %p\n\n", heap_ptr);
 }
 ```
 
