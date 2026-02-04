@@ -1,5 +1,6 @@
 ---
 layout: section
+hide: true
 ---
 
 # Program Memory
@@ -8,6 +9,7 @@ layout: section
 ---
 layout: two-cols-header
 transition: fade
+hide: true
 ---
 
 # Program Memory
@@ -27,6 +29,11 @@ transition: fade
 * Each address represents 1-byte (8-bits) of space
 * Byte order within objects is determined by the system's *Endianness*
 
+::right::
+<div class="flex justify-end">
+    <MemoryLayout />
+</div>
+
 <!--
 This is standard program memory diagram, with common components
 - It starts at low-address (bottom) and extends to a high address (top)
@@ -44,15 +51,10 @@ Programs have access to other types of data stores, including
 * Disk (slow, managed by the OS)
 -->
 
-::right::
-<div class="flex justify-end">
-    <MemoryLayout />
-</div>
-
-
 ---
 layout: two-cols-header
 transition: fade
+hide: true
 ---
 
 # Program Memory
@@ -85,6 +87,7 @@ on microcontrollers, you are working with real memory layout.
 ---
 layout: two-cols-header
 transition: fade
+hide: true
 ---
 
 # Static Memory
@@ -225,6 +228,7 @@ int main() { return 0; }
 ---
 layout: two-cols-header
 transition: fade
+hide: true
 ---
 
 # Dynamic Memory
@@ -368,6 +372,7 @@ int add(int *a, int *b) {
 ---
 layout: two-cols-header
 transition: fade
+hide: true
 ---
 
 # Pointers

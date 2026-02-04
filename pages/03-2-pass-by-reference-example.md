@@ -1,149 +1,166 @@
 ---
 layout: two-cols-header
-layoutClass: col-wide-left 
+layoutClass: col-wide-left
 transition: fade
 ---
 
 # Pass by ~~Reference~~ Value with Pointers
+The swap, solved!
 
 ::left::
 
 ```c{monaco-run}
 #include<stdio.h>
 
-void square(int* x) {
-    *x = *x * *x;
-    printf("x = %d  (in fn square)\n", *x);
+void swap(int* a, int* b) {
+    int temp = *a;
+    *a = *b;
+    *b = temp;
 }
 
 int main() {
-    int a = 5;
-    printf("a = %d   (before fn square)\n", a);
-    square(&a);
-    printf("a = %d   (after fn square)\n", a);
+    int x = 3;
+    int y = 7;
+    printf("before swap: x=%d, y=%d\n", x, y);
+    swap(&x, &y);
+    printf("after swap:  x=%d, y=%d\n", x, y);
 }
 ```
 
 ::right::
 
-Pointer as parameters emulate *pass by reference*
+Pointer parameters emulate *pass by reference*
 * Pointers are **still copied**
+* But they point to the **original** variables
 * Allows manipulation across scoped memory
 
+<!--
+Now that we know pointer syntax, let's revisit swap.
+This time we pass pointers to x and y instead of copies.
+-->
+
 ---
-layout: two-cols-header
-layoutClass: col-wide-left 
+layout: two-cols
+layoutClass: col-wide-left
 transition: fade
 ---
 
 # Pass by ~~Reference~~ Value with Pointers
-`square` accepts *a pointer to an integer* as a parameter
+`swap` accepts *pointers to integers* as parameters
 
 ::left::
-```c{11}
+```c {12}{lines:true}
 #include<stdio.h>
 
-void square(int* x) {
-    *x = *x * *x;
-    printf("x = %d  (in fn square)\n", *x);
+void swap(int* a, int* b) {
+    int temp = *a;
+    *a = *b;
+    *b = temp;
 }
 
 int main() {
-    int a = 5;
-    printf("a = %d   (before fn square)\n", a);
-    square(&a);
-    printf("a = %d   (after fn square)\n", a);
+    int x = 3;
+    int y = 7;
+    printf("before swap: x=%d, y=%d\n", x, y);
+    swap(&x, &y);
+    printf("after swap:  x=%d, y=%d\n", x, y);
 }
 ```
 
 ::right::
 <div class="flex justify-end">
-    <MemoryTable 
-        title="[main] stack frame" 
-        :baseAddress="0xffff1000"
+    <MemoryTable
+        title="[main] stack frame"
+        :baseAddress="0x1004"
         :variables="[
-            { type: 'gap', value: 4 },
-            { type: 'int', name: 'a', value: 5 }
+            { type: 'int', name: 'y', value: 7 },
+            { type: 'int', name: 'x', value: 3 }
+        ]"
+        showValues
+        :showTopEllipsis="false"
+    />
+</div>
+
+---
+layout: two-cols
+layoutClass: col-wide-left
+transition: fade
+---
+
+# Pass by ~~Reference~~ Value with Pointers
+Pointers `a` and `b` are copied — they point to `x` and `y`
+
+::left::
+```c {3-4}{lines:true}
+#include<stdio.h>
+
+void swap(int* a, int* b) {
+    int temp = *a;
+    *a = *b;
+    *b = temp;
+}
+
+int main() {
+    int x = 3;
+    int y = 7;
+    printf("before swap: x=%d, y=%d\n", x, y);
+    swap(&x, &y);
+    printf("after swap:  x=%d, y=%d\n", x, y);
+}
+```
+
+::right::
+<div class="flex justify-end">
+    <MemoryTable
+        title="[swap] stack frame"
+        :baseAddress="0x0ff8"
+        :variables="[
+            { type: 'int', name: 'temp', value:  3},
+            { type: 'int*', name: 'b', value: 0x00001004 },
+            { type: 'int*', name: 'a', value: 0x00001000 }
         ]"
         showValues
     />
 </div>
 
 ---
-layout: two-cols-header
-layoutClass: col-wide-left 
+layout: two-cols
+layoutClass: col-wide-left
 transition: fade
 ---
 
 # Pass by ~~Reference~~ Value with Pointers
-The pointers gets copied on the new stack frame
+Dereference and swap via pointers — changes `x` and `y` in main's frame!
 
 ::left::
-```c{3}
+```c {5-6}{lines:true}
 #include<stdio.h>
 
-void square(int* x) {
-    *x = *x * *x;
-    printf("x = %d  (in fn square)\n", *x);
+void swap(int* a, int* b) {
+    int temp = *a;
+    *a = *b;
+    *b = temp;
 }
 
 int main() {
-    int a = 5;
-    printf("a = %d   (before fn square)\n", a);
-    square(&a);
-    printf("a = %d   (after fn square)\n", a);
+    int x = 3, y = 7;
+    printf("before swap: x=%d, y=%d\n", x, y);
+    swap(&x, &y);
+    printf("after swap:  x=%d, y=%d\n", x, y);
 }
 ```
 
 ::right::
 <div class="flex justify-end">
-    <MemoryTable 
-        title="[square] stack frame" 
-        :baseAddress="0xffff0ff8"
+    <MemoryTable
+        title="[main] stack frame"
+        :baseAddress="0x1004"
         :variables="[
-            { type: 'gap', value: 4 },
-            { type: 'int*', name: 'x', value: 0x00001004 }
+            { type: 'int', name: 'y', value: 3 },
+            { type: 'int', name: 'x', value: 7 }
         ]"
         showValues
-    />
-</div>
-
----
-layout: two-cols-header
-layoutClass: col-wide-left 
-transition: fade
----
-
-# Pass by ~~Reference~~ Value with Pointers
-The original value is altered using dereferencing
-
-::left::
-```c{4}
-#include<stdio.h>
-
-void square(int* x) {
-    *x = *x * *x;
-    printf("x = %d  (in fn square)\n", *x);
-}
-
-int main() {
-    int a = 5;
-    printf("a = %d   (before fn square)\n", a);
-    square(&a);
-    printf("a = %d   (after fn square)\n", a);
-}
-```
-
-::right::
-<div class="flex justify-end">
-    <MemoryTable 
-        title="[main] stack frame" 
-        :baseAddress="0xffff1000"
-        :variables="[
-            { type: 'gap', value: 4 },
-            { type: 'int', name: 'a', value: 25 }
-        ]"
-        showValues
+        :showTopEllipsis="false"
     />
 </div>
 
@@ -154,22 +171,23 @@ transition: fade
 ---
 
 # Compare
-Pass by value with and without pointers
+Swap without pointers vs swap with pointers
 
 ::left::
 ```c{monaco-run}
 #include<stdio.h>
 
-void square(int x) {
-    x = x * x;
-    printf("x = %d  (in fn square)\n", x);
+void swap(int a, int b) {
+    int temp = a;
+    a = b;
+    b = temp;
 }
 
-int main() {        // program entry point
-    int a = 5;
-    printf("a = %d   (before fn square)\n", a);
-    square(a);
-    printf("a = %d   (after fn square)\n", a);
+int main() {
+    int x = 3, y = 7;
+    printf("before: x=%d, y=%d\n", x, y);
+    swap(x, y);
+    printf("after:  x=%d, y=%d\n", x, y);
 }
 ```
 
@@ -177,19 +195,23 @@ int main() {        // program entry point
 ```c{monaco-run}
 #include<stdio.h>
 
-void square(int* x) {
-    *x = *x * *x;
-    printf("x = %d  (in fn square)\n", *x);
+void swap(int* a, int* b) {
+    int temp = *a;
+    *a = *b;
+    *b = temp;
 }
 
 int main() {
-    int a = 5;
-    printf("a = %d   (before fn square)\n", a);
-    square(&a);
-    printf("a = %d   (after fn square)\n", a);
+    int x = 3, y = 7;
+    printf("before: x=%d, y=%d\n", x, y);
+    swap(&x, &y);
+    printf("after:  x=%d, y=%d\n", x, y);
 }
 ```
 
 <!--
-    Now let's look at couple more syntax examples
+[Check] "Why did the swap work this time but not before?"
+
+The pointer version doesn't copy x and y — it copies their ADDRESSES.
+When we dereference, we modify the originals directly.
 -->

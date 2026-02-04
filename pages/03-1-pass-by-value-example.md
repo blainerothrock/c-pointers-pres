@@ -1,38 +1,42 @@
 ---
 layout: two-cols-header
-layoutClass: col-wide-left 
+layoutClass: col-wide-left
 ---
 
-# Pass by Value
+# The Problem: Swap
 
 ::left::
 ```c{monaco-run}
 #include<stdio.h>
 
-void square(int x) {
-    x = x * x;
-    printf("x = %d  (in fn square)\n", x);
+void swap(int a, int b) {
+    int temp = a;
+    a = b;
+    b = temp;
+    printf("in swap: a=%d, b=%d\n", a, b);
 }
 
 int main() {
-    int a = 5;
-    printf("a = %d   (before fn square)\n", a);
-    square(a);
-    printf("a = %d   (after fn square)\n", a);
+    int x = 3, y = 7;
+    printf("before swap: x=%d, y=%d\n", x, y);
+    swap(x, y);
+    printf("after swap:  x=%d, y=%d\n", x, y);
 }
 ```
 
 ::right::
 
 C **is strictly** pass by value
-* when a variable is *passed* from a caller, it is **always** copied.
+* when a variable is *passed* to a function, it is **always** copied.
+
+<br />
+<br />
 
 <!--
+[Predict] "What will x and y be after calling swap(x, y)?"
 
-[Question] what is the output here?
- -- what is A before and after calling SQUARE()?
-
- it doesn't change. hm .... let's explore
+Let students answer before running the code. Most will expect x=7, y=3.
+Run it — surprise! x and y are unchanged. Why? Let's trace through the stack.
 -->
 
 ---
@@ -44,28 +48,31 @@ transition: fade
 Main stack frame initialized
 
 ::left::
-```c{8}
+```c {10}{lines:true}
 #include<stdio.h>
 
-void square(int x) {
-    x = x * x;
-    printf("x = %d  (in fn square)\n", x);
+void swap(int a, int b) {
+    int temp = a;
+    a = b;
+    b = temp;
+    printf("in swap: a=%d, b=%d\n", a, b);
 }
 
-int main() {        // program entry point
-    int a = 5;
-    printf("a = %d   (before fn square)\n", a);
-    square(a);
-    printf("a = %d   (after fn square)\n", a);
+int main() {
+    int x = 3;
+    int y = 7;
+    printf("before swap: x=%d, y=%d\n", x, y);
+    swap(x, y);
+    printf("after swap:  x=%d, y=%d\n", x, y);
 }
 ```
 
 
 ::right::
 <div class="flex justify-end">
-    <MemoryTable 
-        title="[main] stack frame" 
-        :baseAddress="0x1000"
+    <MemoryTable
+        title="[main] stack frame"
+        :baseAddress="0x1004"
         :variables="[
             { type: 'gap', value: 8 }
         ]"
@@ -81,33 +88,36 @@ transition: fade
 ---
 
 # Pass by Value
-`a` is pushed to the stack frame
+`x` and `y` are pushed to the stack frame
 
 ::left::
-```c{9}
+```c {11-12}{lines:true}
 #include<stdio.h>
 
-void square(int x) {
-    x = x * x;
-    printf("x = %d  (in fn square)\n", x);
+void swap(int a, int b) {
+    int temp = a;
+    a = b;
+    b = temp;
+    printf("in swap: a=%d, b=%d\n", a, b);
 }
 
-int main() {        // program entry point
-    int a = 5;
-    printf("a = %d   (before fn square)\n", a);
-    square(a);
-    printf("a = %d   (after fn square)\n", a);
+int main() {
+    int x = 3;
+    int y = 7;
+    printf("before swap: x=%d, y=%d\n", x, y);
+    swap(x, y);
+    printf("after swap:  x=%d, y=%d\n", x, y);
 }
 ```
 
 ::right::
 <div class="flex justify-end">
-    <MemoryTable 
-        title="[main] stack frame" 
-        :baseAddress="0x1000"
+    <MemoryTable
+        title="[main] stack frame"
+        :baseAddress="0x1004"
         :variables="[
-            { type: 'gap', value: 4 },
-            { type: 'int', name: 'a', value: 5 }
+            { type: 'int', name: 'y', value: 7 },
+            { type: 'int', name: 'x', value: 3 }
         ]"
         showValues
         :showTopEllipsis="false"
@@ -115,66 +125,30 @@ int main() {        // program entry point
 </div>
 
 ---
-layout: two-cols-header
+layout: two-cols
 transition: fade
 ---
 
 # Pass by Value
-`square` accepts an integer value as a parameter. 
+`swap(x, y)` called — new stack frame created
 
 ::left::
-```c{11}
+```c {3}{lines:true}
 #include<stdio.h>
 
-void square(int x) {
-    x = x * x;
-    printf("x = %d  (in fn square)\n", x);
+void swap(int a, int b) {
+    int temp = a;
+    a = b;
+    b = temp;
+    printf("in swap: a=%d, b=%d\n", a, b);
 }
 
-int main() {        // program entry point
-    int a = 5;
-    printf("a = %d   (before fn square)\n", a);
-    square(a);
-    printf("a = %d   (after fn square)\n", a);
-}
-```
-
-::right::
-<div class="flex justify-end">
-    <MemoryTable 
-        title="[main] stack frame" 
-        :baseAddress="0xffff1000"
-        :variables="[
-            { type: 'gap', value: 4 },
-            { type: 'int', name: 'a', value: 5 }
-        ]"
-        showValues
-        :showTopEllipsis="false"
-    />
-</div>
-
----
-layout: two-cols-header
-transition: fade
----
-
-# Pass by Value
-`square` get its own stack frame
-
-::left::
-```c{3}
-#include<stdio.h>
-
-void square(int x) {
-    x = x * x;
-    printf("x = %d  (in fn square)\n", x);
-}
-
-int main() {        // program entry point
-    int a = 5;
-    printf("a = %d   (before fn square)\n", a);
-    square(a);
-    printf("a = %d   (after fn square)\n", a);
+int main() {
+    int x = 3; 
+    int y = 7;
+    printf("before swap: x=%d, y=%d\n", x, y);
+    swap(x, y);
+    printf("after swap:  x=%d, y=%d\n", x, y);
 }
 ```
 
@@ -182,15 +156,106 @@ int main() {        // program entry point
 
 ::right::
 <div class="flex justify-end">
-    <MemoryTable 
-        title="[square] stack frame" 
-        :baseAddress="0xffff0ff8"
+    <MemoryTable
+        title="[swap] stack frame"
+        :baseAddress="0x0ff8"
         :variables="[
-            { type: 'gap', value: 8 },
+            { type: 'gap', value: 4 },
+            { type: 'int', name: 'b', value: 7 },
+            { type: 'int', name: 'a', value: 3 }
         ]"
         showValues
     />
 </div>
+
+---
+layout: two-cols
+transition: fade
+---
+
+# Pass by Value
+`temp` is created to persist `a` during the swap
+
+::left::
+```c {4}{lines:true}
+#include<stdio.h>
+
+void swap(int a, int b) {
+    int temp = a;
+    a = b;
+    b = temp;
+    printf("in swap: a=%d, b=%d\n", a, b);
+}
+
+int main() {
+    int x = 3; 
+    int y = 7;
+    printf("before swap: x=%d, y=%d\n", x, y);
+    swap(x, y);
+    printf("after swap:  x=%d, y=%d\n", x, y);
+}
+```
+
+**Note**: The `main` stack frame still exists
+
+::right::
+<div class="flex justify-end">
+    <MemoryTable
+        title="[swap] stack frame"
+        :baseAddress="0x0ff8"
+        :variables="[
+            { type: 'int', name: 'temp', value: 3 },
+            { type: 'int', name: 'b', value: 7 },
+            { type: 'int', name: 'a', value: 3 }
+        ]"
+        showValues
+    />
+</div>
+
+---
+layout: two-cols
+transition: fade
+---
+
+# Pass by Value
+`a` and `b` are swapped using `temp`
+ 
+::left::
+```c {5-6}{lines:true}
+#include<stdio.h>
+
+void swap(int a, int b) {
+    int temp = a;
+    a = b;
+    b = temp;
+    printf("in swap: a=%d, b=%d\n", a, b);
+}
+
+int main() {
+    int x = 3;
+    int y = 7;
+    printf("before swap: x=%d, y=%d\n", x, y);
+    swap(x, y);
+    printf("after swap:  x=%d, y=%d\n", x, y);
+}
+```
+
+The swap worked... but only on the **copies**.
+
+::right::
+<div class="flex justify-end">
+    <MemoryTable
+        title="[swap] stack frame"
+        :baseAddress="0x0ff8"
+        :variables="[
+            { type: 'int', name: 'temp', value: 3 },
+            { type: 'int', name: 'b', value: 3 },
+            { type: 'int', name: 'a', value: 7 }
+        ]"
+        showValues
+    />
+</div>
+
 
 ---
 layout: two-cols-header
@@ -198,112 +263,39 @@ transition: fade
 ---
 
 # Pass by Value
-The value of `a` is copied to `x` in the new frame.
+Return to main: `x` and `y` are **unchanged**
 
 ::left::
-```c{3}
+```c {14}{lines:true}
 #include<stdio.h>
 
-void square(int x) {
-    x = x * x;
-    printf("x = %d  (in fn square)\n", x);
+void swap(int a, int b) {
+    int temp = a;
+    a = b;
+    b = temp;
+    printf("in swap: a=%d, b=%d\n", a, b);
 }
 
-int main() {        // program entry point
-    int a = 5;
-    printf("a = %d   (before fn square)\n", a);
-    square(a);
-    printf("a = %d   (after fn square)\n", a);
+int main() {
+    int x = 3, y = 7;
+    printf("before swap: x=%d, y=%d\n", x, y);
+    swap(x, y);
+    printf("after swap:  x=%d, y=%d\n", x, y);
 }
 ```
 
-::right::
-<div class="flex justify-end">
-    <MemoryTable 
-        title="[square] stack frame" 
-        :baseAddress="0xffff0ff8"
-        :variables="[
-            { type: 'gap', value: 4 },
-            { type: 'int', name: 'x', value: 5 }
-        ]"
-        showValues
-    />
-</div>
-
----
-layout: two-cols-header
-transition: fade
----
-
-# Pass by Value
-`x` is directly manipulated
-
-::left::
-```c{4}
-#include<stdio.h>
-
-void square(int x) {
-    x = x * x;
-    printf("x = %d  (in fn square)\n", x);
-}
-
-int main() {        // program entry point
-    int a = 5;
-    printf("a = %d   (before fn square)\n", a);
-    square(a);
-    printf("a = %d   (after fn square)\n", a);
-}
-```
+The `swap` stack frame is "popped" off the stack, effectively freed.
 
 ::right::
 <div class="flex justify-end">
-    <MemoryTable 
-        title="[square] stack frame" 
-        :baseAddress="0xffff0ff8"
+    <MemoryTable
+        title="[main] stack frame"
+        :baseAddress="0x1000"
         :variables="[
-            { type: 'gap', value: 4 },
-            { type: 'int', name: 'x', value: 25 }
+            { type: 'int', name: 'y', value: 7 },
+            { type: 'int', name: 'x', value: 3 }
         ]"
-        showValues
-    />
-</div>
-
----
-layout: two-cols-header
-transition: fade
----
-
-# Pass by Value
-`a` remains unaltered in the `main` stack frame.
-
-::left::
-```c{12}
-#include<stdio.h>
-
-void square(int x) {
-    x = x * x;
-    printf("x = %d  (in fn square)\n", x);
-}
-
-int main() {        // program entry point
-    int a = 5;
-    printf("a = %d   (before fn square)\n", a);
-    square(a);
-    printf("a = %d   (after fn square)\n", a);
-}
-```
-
-The `square` stack frame is "popped" off the stack, effectively freed.
-
-::right::
-<div class="flex justify-end">
-    <MemoryTable 
-        title="[main] stack frame" 
-        :baseAddress="0xffff1000"
-        :variables="[
-            { type: 'gap', value: 4 },
-            { type: 'int', name: 'a', value: 5 }
-        ]"
+        :showTopEllipsis="false"
         showValues
     />
 </div>

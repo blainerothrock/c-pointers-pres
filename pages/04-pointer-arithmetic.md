@@ -14,7 +14,7 @@ layoutClass: col-wide-left
 
 ::left::
 
-```c{monaco-run}
+```c {monaco-run}
 #include<stdio.h>
 #include <stdlib.h>
 
@@ -43,6 +43,11 @@ Pointer arithmetic is **scaled** by the size of the type
 
 This is key for **arrays** which index by pointers
 
+<!--
+[Predict] "If ptr is a double* at address 0x100, what is ptr + 1?"
+Answer: 0x108, not 0x101 — because double is 8 bytes.
+-->
+
 ---
 layout: two-cols-header
 layoutClass: col-wide-left 
@@ -59,7 +64,8 @@ arrays *decay* to a pointer
 
 int main() {
     int arr[5] = { 5, 4, 3, 2, 1 };
-    int* ptr = arr;
+    int* ptr = arr;         // array decays to pointer
+    // int* ptr = &arr[0];  // same thing!
 
     printf("1. %d - %d\n", arr[0], ptr[0]);
     printf("2. %d - %d\n", *(arr + 1), *(ptr + 1));
@@ -75,6 +81,7 @@ int main() {
 ::right::
 Pointer arithmetic is at the core of the array implementation
 * An array variable is basically a pointer
+* `int* ptr = arr` is equivalent to `int* ptr = &arr[0]`
 
 <!--
 arrays are bascially pointers (but not exactly)
@@ -94,7 +101,7 @@ An array is a pointer when passed to a function
 
 ::left::
 
-```c{monaco-run}
+```c {*}{lines:true} {monaco-run}
 #include<stdio.h>
 
 void square_arr(int arr[], int size) {
@@ -124,6 +131,11 @@ Arrays are *always* passed as pointers, usually with the array size.
 
 Remember: `arr[i] == *(arr + i)`
 
+<!--
+[Predict] "What does sizeof(arr) return inside the function vs alongside the declaration?"
+Answer: Inside the function it returns the pointer size (8 bytes on 64-bit), not the array size.
+-->
+
 
 ---
 layout: two-cols-header
@@ -135,7 +147,7 @@ arrays *decay* to a pointer
 
 ::left::
 
-```c{monaco-run}
+```c {*}{lines:true} {monaco-run}
 #include<stdio.h>
 #include <stdlib.h>
 
@@ -167,7 +179,7 @@ implementing `strlen` with pointer arithmetic
 
 ::left::
 
-```c{monaco-run}
+```c {*}{lines:true} {monaco-run}
 #include<stdio.h>
 
 int my_strlen(char* s) {

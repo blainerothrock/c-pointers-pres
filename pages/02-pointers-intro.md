@@ -34,7 +34,7 @@ review
 
 ::right::
 
-```c
+```c {*}{lines:true}
 #include <stdio.h>
 
 struct __attribute__((packed)) my_struct {
@@ -75,9 +75,9 @@ This is an empty program, nothing is stored in memory.
 
 ::left::
 ##
-```c [main.c]
+```c [main.c] {*}{lines:true}
 int main() {
-    
+
     return 0;
 }
 ```
@@ -111,7 +111,7 @@ Add a value, still nothing in memory (but valid).
 
 ::left::
 ##
-```c [main.c]
+```c [main.c] {*}{lines:true}
 int main() {
     34;
 
@@ -150,7 +150,7 @@ Assign a variable
 
 ::left::
 ##
-```c [main.c]
+```c [main.c] {*}{lines:true}
 int main() {
     char a = 97; // 'a' character is ASCII
     // char a = 'a'
@@ -200,7 +200,7 @@ Assign a variable
 
 ::left::
 ##
-```c [main.c]
+```c [main.c] {*}{lines:true}
 int main() {
     char a = 97; // 'a' character is ASCII
     int b = 25234;
@@ -246,14 +246,13 @@ Now we add another variable, a interger
 ---
 layout: two-cols-header
 transition: fade
-layoutClass: col-wide-left 
+layoutClass: col-wide-left
 ---
 
 # What is a Pointer?
 **A pointer** is a special variable which **stores a memory address**
 
 ::left::
-
 
 * Pointers *point* to another location in memory
 * Functionally, a pointer is an integer (a memory address)
@@ -262,25 +261,61 @@ layoutClass: col-wide-left
     * *special* operators and arithmetic
 
 <br />
- 
-**Pointers have a type**
-* Every data type can have a pointer
-* The type determines the size of the data pointed to and how to read it
-* Pointers are always the first address (lowest) of an object (regardless of endianness)
+
+```c [main.c] {4}{lines:true}
+int main() {
+    char a = 97; // 'a' character is ASCII
+    int b = 25234;
+    int *a_ptr = &a;
+    
+    return 0;
+}
+```
+
+::right::
+
+<img src="/images/pointer-to-int.png" alt="pointer to int meme" class="w-48 mx-auto mt-4" />
 
 <!--
 draw on screen: point to address, explain first address
 -->
 
+---
+layout: two-cols-header
+transition: fade
+layoutClass: col-wide-left
+---
+
+# What is a Pointer?
+**Pointers have a type**
+
+::left::
+
+* Every data type can have a pointer
+* The type determines the size of the data pointed to and how to read it
+* Pointers are always the first address (lowest) of an object (regardless of endianness)
+
+<br />
+
+```c [main.c] {4}{lines:true}
+int main() {
+    char a = 97; // 'a' character is ASCII
+    int b = 25234;
+    int *a_ptr = &a;
+    
+    return 0;
+}
+```
+
 ::right::
 
 <div class="flex justify-end">
-    <MemoryTable 
-        title="stack" 
+    <MemoryTable
+        title="stack"
         :baseAddress="0x1000"
         :variables="[
             { type: 'gap', value: 1 },
-            { type: 'int*', name: 'a_ptr', value: 0x00001005 },
+            { type: 'int*', name: 'a_ptr', value: 0x00001009 },
             { type: 'int', name: 'b', value: 25234 },
             { type: 'char', name: 'a', value: 97 }
         ]"
