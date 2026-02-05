@@ -107,7 +107,7 @@ Spoiler: yes, with pointers
 ```c {monaco-run}
 #include<stdio.h>
 
-void swap(int* a, int* b) {
+void swap(int *a, int *b) {
     int temp = *a;
     *a = *b;
     *b = temp;
@@ -123,9 +123,13 @@ int main() {
 
 ::right::
 
+<div v-click>
+
 It works! But what is `*`, `&`, `int*`?
 
 Let's find out ...
+
+</div>
 
 <!--
 Don't explain the syntax yet. Just show it works and that we need to learn what these symbols mean.
@@ -209,7 +213,7 @@ int main() {
 ```
 
 ---
-layout: default
+layout: end
 ---
 
 # End

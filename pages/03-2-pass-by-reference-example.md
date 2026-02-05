@@ -12,7 +12,7 @@ The swap, solved!
 ```c{monaco-run}
 #include<stdio.h>
 
-void swap(int* a, int* b) {
+void swap(int *a, int *b) {
     int temp = *a;
     *a = *b;
     *b = temp;
@@ -52,7 +52,7 @@ transition: fade
 ```c {10-11}{lines:true}
 #include<stdio.h>
 
-void swap(int* a, int* b) {
+void swap(int *a, int *b) {
     int temp = *a;
     *a = *b;
     *b = temp;
@@ -94,7 +94,7 @@ Pointers `a` and `b` are copied
 ```c {3-4,13}{lines:true}
 #include<stdio.h>
 
-void swap(int* a, int* b) {
+void swap(int *a, int *b) {
     int temp = *a;
     *a = *b;
     *b = temp;
@@ -136,7 +136,7 @@ Dereference and swap via pointers, changes `x` and `y` in main's frame!
 ```c {5-6}{lines:true}
 #include<stdio.h>
 
-void swap(int* a, int* b) {
+void swap(int *a, int *b) {
     int temp = *a;
     *a = *b;
     *b = temp;
@@ -177,7 +177,7 @@ Dereference and swap via pointers, changes `x` and `y` in main's frame!
 ```c {13}{lines:true}
 #include<stdio.h>
 
-void swap(int* a, int* b) {
+void swap(int *a, int *b) {
     int temp = *a;
     *a = *b;
     *b = temp;
@@ -237,7 +237,7 @@ int main() {
 ```c{monaco-run}
 #include<stdio.h>
 
-void swap(int* a, int* b) {
+void swap(int *a, int *b) {
     int temp = *a;
     *a = *b;
     *b = temp;

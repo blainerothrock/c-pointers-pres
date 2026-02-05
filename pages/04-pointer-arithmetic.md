@@ -19,7 +19,7 @@ layoutClass: col-wide-left
 #include <stdlib.h>
 
 int main() {
-    double* heap_ptr = malloc(sizeof(double));
+    double *heap_ptr = malloc(sizeof(double));
     printf("heap_ptr:      %p\n", heap_ptr);
     
     heap_ptr++;
@@ -55,7 +55,7 @@ arrays *decay* to a pointer
 
 int main() {
     int arr[5] = { 5, 4, 3, 2, 1 };
-    int* ptr = arr;         // array decays to pointer
+    int *ptr = arr;         // array decays to pointer
     // int* ptr = &arr[0];  // same thing!
 
     printf("1. %d - %d\n", arr[0], ptr[0]);
@@ -144,7 +144,7 @@ arrays *decay* to a pointer
 
 int main() {
     char str[] = "Now you know pointers!";
-    char* ptr = str;
+    char *ptr = str;
 
     printf("string: %s\n", str);
     printf("1. %c - %c\n", str[0], ptr[0]);

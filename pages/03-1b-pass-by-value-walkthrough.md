@@ -291,7 +291,7 @@ The `swap` stack frame is "popped" off the stack, effectively freed.
 <div class="flex justify-end">
     <MemoryTable
         title="[main] stack frame"
-        :baseAddress="0x1000"
+        :baseAddress="0x1004"
         :variables="[
             { type: 'int', name: 'y', value: 7 },
             { type: 'int', name: 'x', value: 3 }

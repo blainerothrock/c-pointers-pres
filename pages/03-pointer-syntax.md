@@ -28,7 +28,7 @@ The pointer declarator: `*`
 
 int main() {
     int a = 65;
-    int* a_ptr;
+    int *a_ptr;
 
     printf("a_ptr = %p\n", a_ptr);
     printf("size of a_ptr is %d bytes\n", sizeof(a_ptr));
@@ -64,8 +64,8 @@ Style: `int*` vs `int *`
 #include<stdio.h>
 
 int main() {
-    double* ptr;       // style A (recommended)
-    double *other_ptr; // style B (equivalent)
+    double *ptr;       // style A (recommended)
+    double* other_ptr; // style B (equivalent)
 
     // gotchas
     int* a, b;     // a is a pointer, b is an int (!)
@@ -83,7 +83,7 @@ Both `int* p` and `int *p` are valid — C doesn't care about the space.
 <br>
 
 Suggestions (see [C style guide](https://nu-cs211.github.io/cs211-files/cstyle.html)):
-* Use declarator without a space: `int*`
+* Use declarator with a space: `int *` (this is suggested in Linux/GNU style guides, however c++ is the opposite)
 * Never declare multiple variables on the same line
 
 <!--
@@ -108,7 +108,7 @@ Address-of operator: `&`
 
 int main() {
     int a = 65;
-    int* a_ptr = &a;
+    int *a_ptr = &a;
 
     printf("a is located at %p in memory\n", a_ptr);
 
@@ -249,7 +249,7 @@ The indirection operator: `*`
 
 int main() {
     int a = 65;
-    int* a_ptr = &a;
+    int *a_ptr = &a;
 
     printf("a = %d\n", a);
     *a_ptr = 101;
@@ -260,7 +260,9 @@ int main() {
 ::right::
 
 The dereference operator functions the same as the variable itself
-* **Note**: dereferencing is *a little* slower, requiring multiple memory lookups
+* **Note**: `&` and `*` are inverses:
+    * `*(&a) == a`
+    * `&(*a_ptr) == a_ptr`
 
 <!--
 Anything you can do with the variable you can now do with the pointer
@@ -296,7 +298,7 @@ int main() {
         .author="Dan Simmons", 
         .price=2.99
     };
-    Book* hyperion_ptr = &hyperion;
+    Book *hyperion_ptr = &hyperion;
 
     (*hyperion_ptr).price = 3.99;   // the full dereference and access
     hyperion_ptr->price = 4.99;   // shorthand
@@ -317,34 +319,6 @@ The book is populated, a pointer is set, and then we update the price using a po
 There is a shorthand to doing this with arrow operator.
 
 This all may seem redundant, but when a struct is passed to a function, the arrow operator is required.
--->
-
----
-layout: default
----
-
-# Quick Reference: `*` and `&`
-
-* **`&` (address-of):** given a variable, returns its memory address
-  * `int* a_ptr = &a;` get the address of `a`
-* **`*` (dereference):** given a pointer, returns the value at that address
-  * `int val = *a_ptr;` get the value `a_ptr` points to
-
-
-**They are inverses:**
-* `*(&a) == a` — dereference the address of `a` gives back `a`
-* `&(*a_ptr) == a_ptr` address of the dereferenced pointer gives back the pointer
-
-
-**The `*` symbol is overloaded:**
-* In a **declaration**: `int* p` declares `p` as a pointer to `int`
-* In an **expression**: `*p` dereferences `p` to get the value
-* As an **operator**: `a * b` multiplication
-
-<!--
-[Check] "What's the difference between * in a declaration vs * in an expression?"
-
-This is a reference slide students can come back to. The key insight is that & and * are inverses.
 -->
 
 ---
@@ -370,8 +344,8 @@ layoutClass: col-wide-left
 #include<stdio.h>
 
 int main() {
-    int* a;         // uninitialized
-    int* b = NULL;  // Same as above
+    int *a;         // uninitialized
+    int *b = NULL;  // Same as above
     printf("a: %p, b: %p\n", a, b);
 
     // *a = 100;       // Segmentation Fault!
@@ -413,10 +387,10 @@ layoutClass: col-wide-left
 
 int main() {
     int a = 65;
-    int* a_ptr = &a;
+    int *a_ptr = &a;
     
     // reads: a pointer to a pointer of type int
-    int** a_ptr_ptr = &a_ptr; 
+    int **a_ptr_ptr = &a_ptr; 
 
     printf("a_ptr: %p, a_ptr_ptr: %p\n", a_ptr, a_ptr_ptr);
     printf("the value of `a` is %d\n", **a_ptr_ptr);
@@ -430,6 +404,8 @@ Pointers can point to pointers
 ::right::
 
 <img src="/images/pointer-to-pointer.png" alt="pointer to pointer meme" class="w-48 mx-auto mt-4" />
+
+<!-- * **Note**: dereferencing is *a little* slower, requiring multiple memory lookups -->
 
 <!--
 Pointers are not limited to just one point, they can point to a bunch.
@@ -447,19 +423,21 @@ layoutClass: col-wide-left
 ::left::
 
 ```c{monaco-run}
-#include<stdio.h>
-#include <stdlib.h>
+#include <stdio.h>
 
 int main() {
-    void* ptr = malloc(512);    // generic pointer
+    int x = 42;
+    float y = 3.14;
 
-    float pi = 3.14;
+    void *ptr;  // generic pointer
 
-    void* pi_ptr = &pi;         // valid
-    // *pi_ptr = 3.14159;       // invalid! (compilation error)
-    *(float*)pi_ptr = 3.14159;  // valid! (casting)
+    ptr = &x;
+    printf("%d\n", *(int*)ptr);    // cast to int*
 
-    printf("pi: %f\n", *(float*)pi_ptr);
+    ptr = &y;
+    printf("%.2f\n", *(float*)ptr); // cast to float*
+
+    return 0;
 }
 ```
 
